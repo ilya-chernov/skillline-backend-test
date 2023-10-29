@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Bank;
 use App\Models\Status;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,9 +17,10 @@ class LoanResource extends JsonResource
     public function toArray($request)
     {
         $status = Status::where('status_id', $this->status)->get('meaning');
+        $bank = Bank::where('bank_id', $this->bank_id)->get('bank_name');
 
         return [
-            'bank_id' => $this->bank_id,
+            'bank_id' => $bank[0]['bank_name'],
             'personnel' => $this->user,
             'percent' => $this->percent,
             'description' => $this->description,
