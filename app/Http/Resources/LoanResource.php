@@ -20,12 +20,15 @@ class LoanResource extends JsonResource
         $bank = Bank::where('bank_id', $this->bank_id)->get('bank_name');
 
         return [
-            'bank_id' => $bank[0]['bank_name'],
+         //   'bank_id' => $bank[0]['bank_name'],
+            'id' => $this->id,
+            'bank_id' => $bank,
             'personnel' => $this->user,
             'percent' => $this->percent,
             'description' => $this->description,
             'amount' => $this->amount,
-            'status' => $status[0]['meaning'],
+           // 'status' => $status[0]['meaning'],
+            'status' => $status,
             'created_at' => $this->created_at,
 
         ];

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\LoanResource;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Models\Loan;
 
 class LoanController extends Controller
@@ -28,7 +30,11 @@ class LoanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $created_loan = Loan::create($request->all());
+
+        $q = new LoanResource($created_loan);
+
+        return $q;
     }
 
     /**
@@ -63,6 +69,8 @@ class LoanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $q = DB::table('loans')->where('id', $id)->get();
+
+        Loan::destroy($q);
     }
 }
